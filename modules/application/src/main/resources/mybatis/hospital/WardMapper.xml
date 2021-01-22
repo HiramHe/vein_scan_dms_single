@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hiram.hospital.mapper.WardMapper">
+
+    <select id="getBedsOfWardById" resultType="hiram.hospital.pojo.po.Bed">
+        select bed.*
+        from hos_ward_bed as ward_bed
+        left join hos_bed as bed on ward_bed.bed_id = bed.bed_id
+        where ward_bed.ward_id = #{wardId}
+    </select>
+
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>vein_scan_dms_single</artifactId>
+        <groupId>com.isyslab</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>modules</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>application</module>
+    </modules>
+
+    <!-- 管理本模块下所有子模块的依赖 -->
+
+    <dependencies>
+
+        <!--=========================================================================================================-->
+        <!-- 以下是引入本项目的其他模块 -->
+
+        <dependency>
+            <groupId>com.isyslab</groupId>
+            <artifactId>base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+        <!--=========================================================================================================-->
+        <!--以下由 顶级项目 控制版本号-->
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!--zip4j-->
+        <dependency>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
+
+
+        <!--=========================================================================================================-->
+        <!--以下由 spring-boot-dependencies 控制版本号-->
+
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!--默认只在开发环境生效-->
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+        配置注解执行器,当执行类中已经定义了对象和该对象的字段后，
+        在配置文件中对该类赋值时，便会非常方便的弹出提示信息。
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+    </dependencies>
+
+</project>

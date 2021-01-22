@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hiram.hospitalization.mapper.HospitalizationMapper">
+
+    <resultMap id="hospitalizationDtoMap" type="hiram.hospitalization.pojo.dto.HospitalizationDto">
+        <association property="sysUser" select="hiram.acl.mapper.UserMapper.selectById" column="user_id" />
+        <association property="patient" select="hiram.patient.mapper.PatientMapper.selectPatientByPatientId" column="patient_id" />
+        <association property="department" select="hiram.hospital.mapper.DepartmentMapper.selectById" column="department_id" />
+        <association property="ward" select="hiram.hospital.mapper.WardMapper.selectById" column="ward_id" />
+        <association property="bed" select="hiram.hospital.mapper.BedMapper.selectById" column="bed_id" />
+    </resultMap>
+
+    <delete id="deleteByIdPermanently">
+        delete from hosp_hospitalization
+        where hospitalization_id = #{hospitalizationId}
+    </delete>
+
+    <update id="recoverAll">
+        update hosp_hospitalization
+        set deleted = 0
+        where deleted = 1
+    </update>
+
+    <select id="list" resultMap="hospitalizationDtoMap">
+        select * from hosp_hospitalization
+        <where>
+            <if test="1 == 1">
+                deleted = 0
+            </if>
+            <if test="hospitalizationId != null">
+                hospitalization_id = #{hospitalizationId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="patientId != null">
+                and patient_id = #{patientId}
+            </if>
+            <if test="departmentId != null">
+                and department_id = #{departmentId}
+            </if>
+            <if test="wardId != null">
+                and ward_id = #{wardId}
+            </if>
+            <if test="bedId != null">
+                and bed_id = #{bedId}
+            </if>
+            <if test="checkinTime != null">
+                and checkin_time >= #{checkinTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryByHospitalizationId" resultMap="hospitalizationDtoMap">
+        select * from hosp_hospitalization
+        where hospitalization_id = #{hospitalizationId}
+    </select>
+
+</mapper>
