@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hiram.patient.mapper.PatientMapper">
+
+    <insert id="insertOne" parameterType="hiram.patient.pojo.po.Patient" useGeneratedKeys="true" keyProperty="patientId" >
+        insert into patient(
+        <if test="patientName != null and patientName != ''">patient_name,</if>
+        <if test="sex != null and sex != ''">sex,</if>
+        <if test="birthday != null">birthday,</if>
+        <if test="email != null and email != ''">email,</if>
+        <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+        <if test="idcardNumber != null and idcardNumber != ''">idcard_number,</if>
+        <if test="birthProvince != null and birthProvince != ''">birth_province,</if>
+        <if test="birthCity != null and birthCity != ''">birth_city,</if>
+        <if test="birthCounty != null and birthCounty != ''">birth_county,</if>
+        <if test="enabled != null">enabled,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        <if test="addId != null and addId != ''">add_id,</if>
+        <if test="addOrient != null and addOrient != ''">add_orient,</if>
+        version
+        )
+        values (
+        <if test="patientName != null and patientName != ''">#{patientName},</if>
+        <if test="sex != null and sex != ''">#{sex},</if>
+        <if test="birthday != null">#{birthday},</if>
+        <if test="email != null and email != ''">#{email},</if>
+        <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+        <if test="idcardNumber != null and idcardNumber != ''">#{idcardNumber},</if>
+        <if test="birthProvince != null and birthProvince != ''">#{birthProvince},</if>
+        <if test="birthCity != null and birthCity != ''">#{birthCity},</if>
+        <if test="birthCounty != null and birthCounty != ''">#{birthCounty},</if>
+        <if test="enabled != null">#{enabled},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        <if test="addId != null and addId != ''">#{addId},</if>
+        <if test="addOrient != null and addOrient != ''">#{addOrient},</if>
+        1
+        )
+    </insert>
+
+    <delete id="deleteByIdPermanently" parameterType="Long">
+        delete from patient
+        where patient_id = #{patientId}
+    </delete>
+
+    <delete id="deleteByIdsPermanently">
+        delete from patient
+        where patient_id in
+        <foreach collection="array" item="patientId" open="(" separator="," close=")">
+            #{patientId}
+        </foreach>
+    </delete>
+
+    <update id="recoverById">
+        update patient
+        set deleted = 0
+        where patient_id = #{patientId}
+    </update>
+
+    <update id="recoverByIds">
+        update patient
+        set deleted = 0
+        <where>
+            <if test="array != null and array.length >0">
+                patient_id in
+                <foreach collection="array" item="patientId" open="(" separator="," close=")">
+                    #{patientId}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <select id="checkPatientNameUnique" parameterType="String" resultType="hiram.patient.pojo.po.Patient" >
+        select patient_id
+        from patient
+        where patient_name = #{patientName}
+    </select>
+
+    <select id="checkPhoneNumberUnique" parameterType="String" resultType="hiram.patient.pojo.po.Patient" >
+        select patient_id
+        from patient
+        where phone_number = #{phoneNumber}
+    </select>
+
+    <select id="checkEmailUnique" parameterType="String" resultType="hiram.patient.pojo.po.Patient" >
+        select patient_id
+        from patient
+        where email = #{email}
+    </select>
+
+    <select id="selectPatientByPatientId" parameterType="Long" resultType="hiram.patient.pojo.po.Patient" >
+        select patient_id,patient_name,sex,birthday,email,phone_number,idcard_number,birth_province,birth_city,birth_county,enabled,remark,add_id,add_orient,deleted,gmt_create,gmt_modify,version
+        from patient
+        where patient_id = #{patientId}
+    </select>
+
+</mapper>
