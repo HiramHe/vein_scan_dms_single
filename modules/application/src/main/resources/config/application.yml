@@ -55,7 +55,7 @@ aliyun:
   oss:
     file:
       endpoint: oss-cn-beijing.aliyuncs.com
-      accessKeyId: LTAI4GBjjUFnVEyyGYT7kkyh
+      accessKeyId: ENC(yEVNpQz3mxc3Sj2ItADHRERRxbmo2I61aj5gNe3NJmHFOlR0rIarBmDsQXZHewT/RpPh97ASz0VBK2vVH9qDkA==)
       accessKeySecret: ENC(lj7v2E44aRwAQrWDH3NeouRHvTJ3YknGZIpQollJ2vWj6XDEwdHywE/WdeyBSZIavLzbPDkOyqhAf+uglFPCvg==)
       # bucket可以在控制台创建，也可以使用代码创建
       bucketName: vein-scan-system-010
