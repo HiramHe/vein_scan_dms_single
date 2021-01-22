@@ -28,11 +28,15 @@ public class JasyptTest {
         String mysqlOriginPwd = "your password";
         String redisOriginPwd = "your password";
 
+        String accessKeySecret = "your accessKeySecret";
+
         String mysqlEncryptPwd = jasyptStringEncryptor.encrypt(mysqlOriginPwd);
         String redisEncryptPwd = jasyptStringEncryptor.encrypt(redisOriginPwd);
+        String accessKeySecretEncrypt = jasyptStringEncryptor.encrypt(accessKeySecret);
 
         System.out.println("mysqlEncryptPwd:" + mysqlEncryptPwd);
         System.out.println("redisEncryptPwd:" + redisEncryptPwd);
+        System.out.println("accessKeySecretEncrypt:" + accessKeySecretEncrypt);
     }
 
     @Test
@@ -42,8 +46,10 @@ public class JasyptTest {
 
         String mysqlOriginPwd = environment.getProperty("spring.datasource.password");
         String redisOriginPwd = environment.getProperty("spring.redis.password");
+        String accessKeySecret = environment.getProperty("aliyun.oss.file.accessKeySecret");
 
         System.out.println("mysqlOriginPwd:" + mysqlOriginPwd);
         System.out.println("redisOriginPwd:" + redisOriginPwd);
+        System.out.println("accessKeySecret:" + accessKeySecret);
     }
 }
