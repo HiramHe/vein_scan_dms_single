@@ -13,7 +13,12 @@
 
     <!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入
     到logger上下文中。定义变量后，可以使“${}”来使用变量。 -->
-    <property name="log.filePath" value="D:/guli_log/edu" />
+
+    <!--windows上-->
+<!--    <property name="log.filePath" value="D:/guli_log/edu" />-->
+
+    <!--linux上-->
+    <property name="log.filePath" value="/tmp/vein_scan_dms/log" />
     <property name="log.global.level" value="info" />
     <property name="log.project.level" value="debug" />
     <property name="log.charset" value="utf-8" />
